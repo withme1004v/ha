@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+
+model tbl_sample_user {
+  uid   String  @id @db.VarChar(255)
+  email String? @db.VarChar(255)
+  uname String? @db.VarChar(255)
+  upw   String? @db.VarChar(255)
+}
+
+model tbl_todo {
+  tno      Int       @id @default(autoincrement())
+  complete Boolean   @db.Bit(1)
+  due_date DateTime? @db.Date
+  title    String?   @db.VarChar(255)
+  writer   String?   @db.VarChar(255)
+}
