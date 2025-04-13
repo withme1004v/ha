@@ -28,15 +28,19 @@ export function makePageDate( page: string | number | undefined,
     const safePage = isNaN(parsedPage) || parsedPage < 1 ? 1 : parsedPage;
     const safeSize = isNaN(parsedSize) || parsedSize < 1 ? 10 : parsedSize;
 
-    const pageCount = Math.ceil(total / safeSize);
+    let pageCount = Math.ceil(total / safeSize);
 
-    let end = Math.ceil(safePage / safeSize) * 10;
+    let end = (Math.ceil(safePage / safeSize)) * 10;
 
     const start = end - 9
 
 
     if(end > pageCount){
         end = pageCount
+    }
+
+    if(end < pageCount){
+        pageCount = end
     }
 
     const prev = start !== 1
